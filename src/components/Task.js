@@ -8,24 +8,24 @@ const Task = ({ task, onChangeState, onEditTask, onDeleteTask }) => {
         <div className="card-body">
           <p className="card-text">{task.description}</p>
           <div className="row">
-            <div className="col-12 col-sm-6">
+            <div className="col-12 col-sm-4">
               <button
-                className="btn btn-outline-success"
+                className="btn btn-outline-success "
                 onClick={() => onChangeState()}
               >
                 {task.isDone ? "Reiniciar" : "Finalizar"}
               </button>
             </div>
 
-            <div className="col-12 col-sm-6">
+            <div className="col-12 col-sm-4">
               <button
-                className="btn btn-outline-primary float-right"
+                className="btn btn-outline-primary "
                 onClick={() => onEditTask()}
               >
                 Editar
               </button>
             </div>
-            <div className="col-12 col-sm-12">
+            <div className="col-12 col-sm-4  float-right">
               <button className="btn btn-danger" onClick={() => onDeleteTask()}>
                 Eliminar
               </button>

@@ -1,12 +1,14 @@
+/* Obtener todas las tareas de la base de datos*/
 export const getTodos = async () => {
-  const tasks = await fetch("http://localhost:3000/api/tasks")
+  const tasks = await fetch("http://localhost:5000/api/tasks")
     .then(res => res.json())
     .then(result => result);
   return tasks;
 };
 
+/* Crea una nueva tarea y la envía con los datos del body a la base de datos */
 export const saveTodos = async (title, description) => {
-  fetch("http://localhost:3000/api/tasks", {
+  await fetch("http://localhost:5000/api/tasks", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -20,10 +22,9 @@ export const saveTodos = async (title, description) => {
   });
 };
 
+/* Mediante un id detecta la tarea y actualiza su información */
 export const editTodos = async (id, title, description) => {
-  console.log(id, title, description);
-
-  fetch("http://localhost:3000/api/tasks", {
+  await fetch("http://localhost:5000/api/tasks", {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -38,12 +39,13 @@ export const editTodos = async (id, title, description) => {
   });
 };
 
+/* Actualiza el valor en la base de datos de "isDone" a su inverso */
 export const changeIsDone = async id => {
-  const task = await fetch("http://localhost:3000/api/tasks/" + id);
+  const task = await fetch("http://localhost:5000/api/tasks/" + id);
   const res = await task.json();
   const newState = (await res[0].isDone) ? 0 : 1;
 
-  fetch("http://localhost:3000/api/tasks", {
+  await fetch("http://localhost:5000/api/tasks", {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -58,8 +60,13 @@ export const changeIsDone = async id => {
   });
 };
 
+/**
+ * Convertir a un delete logic
+ */
+
+/* Elimina de la base de datos una tarea segun el id */
 export const deleteTodos = async id => {
-  fetch("http://localhost:3000/api/tasks/" + id, {
+  await fetch("http://localhost:5000/api/tasks/" + id, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
@@ -70,6 +77,7 @@ export const deleteTodos = async id => {
     .then(res => console.log(res));
 };
 
+// Mensaje opcional
 export const saveTask = async () => {
   return "tarea guardada";
 };
