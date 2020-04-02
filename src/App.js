@@ -6,7 +6,8 @@ import {
   saveTodos,
   editTodos,
   changeIsDone,
-  deleteTodos
+  deleteTodos,
+  changeIsAsigned
 } from "./services/todos";
 import ListsContainer from "./components/ListContainer";
 import CustomModal from "./components/common/CustomModal";
@@ -107,9 +108,24 @@ const App = () => {
     );
   };
 
+  const handleClickLogin = () => {
+    const valor = localStorage.getItem("user") == 1 ? 2 : 1;
+    localStorage.setItem("user", valor);
+    getTodos().then(data => setTasks(data));
+  };
+
+  const asignTask = async task => {
+    await changeIsAsigned(task.id).then(() =>
+      getTodos().then(data => setTasks(data))
+    );
+  };
+
   // Reactive components returned
   return (
     <div className="container">
+      <button className="btn btn-success float-left" onClick={handleClickLogin}>
+        Login
+      </button>
       <CustomModal
         isActive={isModalOpened}
         title={form.id ?? form.id > 0 ? "Editar tarea" : "Nuevo tarea"}
@@ -137,6 +153,7 @@ const App = () => {
           editTask={editTask}
           changeTaskStatus={changeTaskStatus}
           deleteTask={deleteTask}
+          asignTaks={asignTask}
         />
       </div>
     </div>

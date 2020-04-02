@@ -1,6 +1,12 @@
 import React from "react";
 
-const Task = ({ task, onChangeState, onEditTask, onDeleteTask }) => {
+const Task = ({
+  task,
+  onChangeState,
+  onEditTask,
+  onDeleteTask,
+  onAsignTask
+}) => {
   return (
     <>
       <div className="card mb-3">
@@ -8,7 +14,7 @@ const Task = ({ task, onChangeState, onEditTask, onDeleteTask }) => {
         <div className="card-body">
           <p className="card-text">{task.description}</p>
           <div className="row">
-            <div className="col-12 col-sm-4">
+            <div className="col-12 col-sm-3">
               <button
                 className="btn btn-outline-success "
                 onClick={() => onChangeState()}
@@ -16,16 +22,20 @@ const Task = ({ task, onChangeState, onEditTask, onDeleteTask }) => {
                 {task.isDone ? "Reiniciar" : "Finalizar"}
               </button>
             </div>
-
-            <div className="col-12 col-sm-4">
+            <div className="col-12 col-sm-3">
               <button
                 className="btn btn-outline-primary "
-                onClick={() => onEditTask()}
+                onClick={() => onAsignTask()}
               >
+                {task.asigned ? "Desasignarmela" : "Asignarmela"}
+              </button>
+            </div>
+            <div className="col-12 col-sm-3">
+              <button className="btn btn-warning " onClick={() => onEditTask()}>
                 Editar
               </button>
             </div>
-            <div className="col-12 col-sm-4  float-right">
+            <div className="col-12 col-sm-3  float-right">
               <button className="btn btn-danger" onClick={() => onDeleteTask()}>
                 Eliminar
               </button>

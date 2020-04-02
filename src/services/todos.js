@@ -60,6 +60,27 @@ export const changeIsDone = async id => {
   });
 };
 
+export const changeIsAsigned = async id => {
+  const task = await fetch("http://localhost:5000/api/tasks/" + id);
+  const res = await task.json();
+  const newState = await !res[0].isAsigned;
+
+  await fetch("http://localhost:5000/api/tasks", {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id: id,
+      title: res[0].title,
+      description: res[0].description,
+      isDone: res[0].isDone,
+      isAsigned: newState
+    })
+  });
+};
+
 /**
  * Convertir a un delete logic
  */

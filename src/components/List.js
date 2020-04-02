@@ -5,6 +5,7 @@ const List = ({
   onChangeTaskStatus,
   onEditTask,
   onDeleteTask,
+  onAsignTask,
   tasksList,
   title
 }) => (
@@ -16,6 +17,7 @@ const List = ({
         onChangeState={() => onChangeTaskStatus(task)}
         onEditTask={() => onEditTask(task)}
         onDeleteTask={() => onDeleteTask(task)}
+        onAsignTask={() => onAsignTask(task)}
         key={key}
       />
     ))}
